@@ -1,9 +1,11 @@
-package com.achmadfatkharrofiqi.notesapp
+package com.achmadfatkharrofiqi.notesapp.ui.activity
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.achmadfatkharrofiqi.notesapp.R
+import com.achmadfatkharrofiqi.notesapp.ui.adapter.NoteAdapter
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
@@ -15,7 +17,8 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         recyclerView.apply {
-            adapter         = NoteAdapter(this@MainActivity)
+            adapter         =
+                NoteAdapter(this@MainActivity)
             layoutManager   = LinearLayoutManager(this@MainActivity)
         }
     }
