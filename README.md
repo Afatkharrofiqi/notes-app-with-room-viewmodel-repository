@@ -1,4 +1,4 @@
-# notes-app-with-room-viewmodel-repository
+# Simple Notes App
 Belajar mengimplementasikan Room ViewModel dan Repository
 
 ## Disini kita belajar cara menggunakan
