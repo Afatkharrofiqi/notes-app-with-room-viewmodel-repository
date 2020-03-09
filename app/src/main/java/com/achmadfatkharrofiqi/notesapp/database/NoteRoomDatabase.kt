@@ -1,6 +1,7 @@
 package com.achmadfatkharrofiqi.notesapp.database
 
 import android.content.Context
+import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 import androidx.sqlite.db.SupportSQLiteDatabase
@@ -9,6 +10,7 @@ import com.achmadfatkharrofiqi.notesapp.model.Note
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
 
+@Database(entities = [Note::class], version = 1, exportSchema = false)
 abstract class NoteRoomDatabase : RoomDatabase() {
 
     abstract fun noteDao(): NoteDao
@@ -41,13 +43,17 @@ abstract class NoteRoomDatabase : RoomDatabase() {
         private var INSTANCE: NoteRoomDatabase? = null
 
         fun getDatabase(context: Context, scope: CoroutineScope): NoteRoomDatabase {
-            val instance = Room.databaseBuilder(
-                context.applicationContext,
-                NoteRoomDatabase::class.java,
-                "note_database"
-            ).addCallback(NoteDatabaseCallback(scope)).build()
-            INSTANCE = instance
-            return instance
+            return INSTANCE ?: synchronized(this) {
+                val instance = Room.databaseBuilder(
+                    context.applicationContext,
+                    NoteRoomDatabase::class.java,
+                    "note_database"
+                )
+                .addCallback(NoteDatabaseCallback(scope))
+                .build()
+                INSTANCE = instance
+                instance
+            }
         }
     }
 }
