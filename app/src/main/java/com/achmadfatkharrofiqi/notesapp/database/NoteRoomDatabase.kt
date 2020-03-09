@@ -45,12 +45,12 @@ abstract class NoteRoomDatabase : RoomDatabase() {
         fun getDatabase(context: Context, scope: CoroutineScope): NoteRoomDatabase {
             return INSTANCE ?: synchronized(this) {
                 val instance = Room.databaseBuilder(
-                    context.applicationContext,
-                    NoteRoomDatabase::class.java,
-                    "note_database"
-                )
-                .addCallback(NoteDatabaseCallback(scope))
-                .build()
+                        context.applicationContext,
+                        NoteRoomDatabase::class.java,
+                        "note_database"
+                    )
+                    .addCallback(NoteDatabaseCallback(scope))
+                    .build()
                 INSTANCE = instance
                 instance
             }
